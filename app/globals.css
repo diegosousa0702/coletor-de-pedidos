@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #050505;
+  --color-primary: #dc2626;
+  --color-primary-hover: #ef4444;
+  --color-surface-card: rgba(24, 24, 27, 0.5);
+  --color-border-zinc: #27272a;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-zinc-100 font-sans antialiased;
+    background-image: radial-gradient(circle at top right, #1a1111, #050505);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-white text-black font-black uppercase text-xs py-2 px-6 rounded-full transition-all active:scale-95 hover:bg-primary hover:text-white flex items-center justify-center gap-2;
+  }
+  
+  .input-field {
+    @apply w-full bg-zinc-950/50 border border-zinc-800 text-white p-4 rounded-xl focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all placeholder:text-zinc-600;
+  }
+  
+  .card-glass {
+    @apply bg-zinc-900/50 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm;
+  }
+
+  .sidebar-icon {
+    @apply p-3 rounded-lg group-hover:bg-zinc-900 transition-all duration-200;
+  }
+
+  .text-shadow-red {
+    text-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+  }
+}
