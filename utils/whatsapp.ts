@@ -1,17 +1,30 @@
 /**
- * Utilitário para integração com WhatsApp
- * Formata as mensagens e gera os links para disparo
+ * Módulo de Integração com WhatsApp
+ * Gera links para abertura de conversa com mensagem pré-formatada.
  */
 
-export const formatarMensagemWhatsApp = (mesa: string, pedido: string, quantidade: number, observacao: string) => {
-  const base = `🍔 *NOVO PEDIDO - BURGER COLLECTOR* 🍔\n\n`;
-  const corpo = `*Mesa:* ${mesa}\n*Pedido:* ${pedido}\n*Qtd:* ${quantidade}\n*Obs:* ${observacao || 'Nenhuma'}`;
-  const rodapé = `\n\n_Enviado via Coletor de Pedidos Digital_`;
+interface DadosPedido {
+  mesa: string | number;
+  pedido: string;
+  quantidade: number;
+  observacao?: string;
+}
 
-  return encodeURIComponent(base + corpo + rodapé);
-};
+/**
+ * Constrói a mensagem e retorna o link do WhatsApp
+ */
+export function gerarLinkWhatsApp(dados: DadosPedido): string {
+  const numero = "5598984687854";
+  
+  const mensagem = `Novo pedido da mesa ${dados.mesa}
 
-export const abrirWhatsApp = (telefone: string, mensagem: string) => {
-  const url = `https://wa.me/${telefone}?text=${mensagem}`;
-  window.open(url, '_blank');
-};
+Pedido:
+${dados.pedido}
+
+Quantidade: ${dados.quantidade}
+
+Observação:
+${dados.observacao || "Nenhuma"}`;
+
+  return `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+}
